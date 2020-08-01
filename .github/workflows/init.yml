@@ -1,0 +1,15 @@
+name: CI
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: fedora:rawhide
+    steps:
+    - uses: actions/checkout@v2
+    - name: build
+      run: |
+        INSTALLROOT="$(mktemp -d)"
+        dnf -y --installroot "${INSTALLROOT}" --releasever rawhide install bash dnf
+        find $INSTALLROOT
