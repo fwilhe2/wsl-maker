@@ -11,5 +11,5 @@ jobs:
     - name: build
       run: |
         INSTALLROOT="$(mktemp -d)"
-        dnf -y --installroot "${INSTALLROOT}" --releasever rawhide install bash dnf
+        dnf -y --installroot "${INSTALLROOT}" --releasever 31 install bash dnf
         find $INSTALLROOT
