@@ -12,4 +12,11 @@ jobs:
       run: |
         INSTALLROOT="$(mktemp -d)"
         dnf -y --installroot "${INSTALLROOT}" --releasever 32 install bash dnf man passwd shadow-utils sudo vim-minimal iproute iputils bind-utils tar openssh-server procps-ng
-        find $INSTALLROOT
+        cd $INSTALLROOT
+        tar tar -cf - * | gzip > ../fedora-wsl.tgz
+    
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        path: fedora-wsl.tgz
+        if-no-files-found: error
