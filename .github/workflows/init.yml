@@ -5,11 +5,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: fedora:rawhide
+    container: fedora:32
     steps:
     - uses: actions/checkout@v2
     - name: build
       run: |
         INSTALLROOT="$(mktemp -d)"
-        dnf -y --installroot "${INSTALLROOT}" --releasever 31 install bash dnf
+        dnf -y --installroot "${INSTALLROOT}" --releasever 32 install bash dnf man passwd shadow-utils sudo vim-minimal iproute iputils bind-utils tar openssh-server procps-ng
         find $INSTALLROOT
